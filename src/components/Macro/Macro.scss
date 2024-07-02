@@ -1,0 +1,52 @@
+
+
+.macro-container {
+    width: 258px;
+    height: 124px;
+    background: #FBFBFB;
+    box-shadow: 0px 2px 4px 0px #00000005;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px;
+    box-sizing: border-box;
+
+    .macro-icon-wrapper {
+        width: 60px;
+        height: 60px;
+        background: #FF00001A;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+
+    }
+    .macro-icon {
+        width: 15.8px;
+        height: 20px;
+      
+
+    }
+
+    .macro-content {
+
+
+        .macro-value {
+            font-family: Roboto;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+            color: #282D30;
+            
+        }
+
+        .macro-title {
+            font-family: Roboto;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 24px;
+            color: #74798C;
+        }
+    }
+}
+

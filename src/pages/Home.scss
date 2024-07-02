@@ -1,0 +1,70 @@
+
+.main-title-container {
+    display: flex;
+    flex-direction: column;
+    gap: 41px;
+}
+
+.main-title {
+     font-family: Roboto;
+     font-weight: 500;
+     font-size: 48px;
+     line-height: 24px;
+
+     &-greetings {
+        font-family: Roboto;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+     }
+
+     span {
+        color: #E60000;
+     }
+}
+
+.graphics-container {
+    margin-top: 77px;
+    width: 1124px;
+    height: 613px;
+    display: flex;
+    gap: 31px;
+
+    .graphics-left-side {
+        width: 74%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .daily-graphics {
+            width: 100%;
+            height: 320px;
+            background-color: aqua;
+            border-radius: 5px;
+        }
+
+        .widgets-container {
+            width: 100%;
+            height: 263px;
+            display: flex;
+            gap: 30px;
+
+            .widget-wrapper {
+                width: 31%;
+                height: 263px;
+                background-color: #E60000;
+                border-radius: 5px;
+            }
+        }
+    }
+
+
+    .graphics-right-side {
+        display: flex;
+        flex-direction: column;
+        gap: 39px;
+        width: 22%;
+        height: 100%;
+    }
+}

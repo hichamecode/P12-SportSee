@@ -1,0 +1,39 @@
+.header {
+    background-color: #020203;
+    height: 91px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    display: flex;
+    align-items: center;
+    gap: 149px;
+    flex-shrink: 0;
+
+    .main-logo-container {
+    display: flex;
+    gap: 10.5px;
+    align-items: center;
+    padding-left: 28px;
+}
+    .navbar {
+        display: flex;
+        align-items: center;
+        gap: 219px;
+
+        &-element {
+            list-style-type: none;
+
+            a {
+                font-family: Roboto;
+                font-weight: 500;
+                font-size: 24px;
+                line-height: 24px;
+                color: white;
+                text-decoration: none;
+            }
+
+        }
+
+    }
+}
+
+
+
