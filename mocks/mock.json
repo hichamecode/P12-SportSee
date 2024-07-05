@@ -1,0 +1,40 @@
+{
+    "id": 20,
+    "name": "Sébastien",
+    "macrosValue" : {
+        "calories": 3000,
+        "proteins": 120,
+        "carbs": 150,
+        "fat": 80
+    },
+    "statistics" : {
+        "intensity": 2,
+        "speed": 3,
+        "strength": 4,
+        "endurance": 3,
+        "energy": 2,
+        "cardio": 4
+    },
+    "score" : 0.15,
+    "sessionLength" : {
+        "monday": 21,
+        "tuesday": 35,
+        "wednesday": 50,
+        "thursday": 15,
+        "friday": 58,
+        "saturday": 0,
+        "sunday": 10
+    },
+    "dailyActivity": {
+        "dayOne": { "weight": 68, "caloriesBurnt": 356 },
+        "dayTwo": { "weight": 68, "caloriesBurnt": 425 },
+        "dayThree": { "weight": 67, "caloriesBurnt": 300 },
+        "dayFour": { "weight": 67, "caloriesBurnt": 150 },
+        "dayFive": { "weight": 67, "caloriesBurnt": 478 },
+        "daySix": { "weight": 66, "caloriesBurnt": 678 },
+        "daySeven": { "weight": 65, "caloriesBurnt": 259 },
+        "dayEight": { "weight": 64, "caloriesBurnt": 350 },
+        "dayNine": { "weight": 64, "caloriesBurnt": 198 },
+        "dayTen": { "weight": 65, "caloriesBurnt": 299 }
+    }
+}
