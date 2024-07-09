@@ -25,16 +25,77 @@
         "saturday": 0,
         "sunday": 10
     },
-    "dailyActivity": {
-        "dayOne": { "weight": 68, "caloriesBurnt": 356 },
-        "dayTwo": { "weight": 68, "caloriesBurnt": 425 },
-        "dayThree": { "weight": 67, "caloriesBurnt": 300 },
-        "dayFour": { "weight": 67, "caloriesBurnt": 150 },
-        "dayFive": { "weight": 67, "caloriesBurnt": 478 },
-        "daySix": { "weight": 66, "caloriesBurnt": 678 },
-        "daySeven": { "weight": 65, "caloriesBurnt": 259 },
-        "dayEight": { "weight": 64, "caloriesBurnt": 350 },
-        "dayNine": { "weight": 64, "caloriesBurnt": 198 },
-        "dayTen": { "weight": 65, "caloriesBurnt": 299 }
-    }
+
+   "activities": [
+        {
+            "id": 1,
+            "weight": 68,
+            "caloriesBurnt": 356,
+            "startTime": "2024-01-01 07:06:00",
+            "endTime": "2024-01-01 07:41:00"
+        },
+        {
+            "id": 2,
+            "weight": 68,
+            "caloriesBurnt": 425,
+            "startTime": "2024-01-02 07:36:00",
+            "endTime": "2024-01-02 08:18:00"
+        },
+        {
+            "id": 3,
+            "weight": 67,
+            "caloriesBurnt": 300,
+            "startTime": "2024-01-03 10:01:00",
+            "endTime": "2024-01-03 10:31:00"
+        },
+        {
+            "id": 4,
+            "weight": 67,
+            "caloriesBurnt": 150,
+            "startTime": "2024-01-04 12:29:00",
+            "endTime": "2024-01-04 12:44:00"
+        },
+        {
+            "id": 5,
+            "weight": 67,
+            "caloriesBurnt": 478,
+            "startTime": "2024-01-05 06:25:00",
+            "endTime": "2024-01-05 07:12:00"
+        },
+        {
+            "id": 6,
+            "weight": 66,
+            "caloriesBurnt": 678,
+            "startTime": "2024-01-06 16:01:00",
+            "endTime": "2024-01-06 17:08:00"
+        },
+        {
+            "id": 7,
+            "weight": 65,
+            "caloriesBurnt": 259,
+            "startTime": "2024-01-07 17:02:00",
+            "endTime": "2024-01-07 17:27:00"
+        },
+        {
+            "id": 8,
+            "weight": 64,
+            "caloriesBurnt": 350,
+            "startTime": "2024-01-08 15:05:00",
+            "endTime": "2024-01-08 15:40:00"
+        },
+        {
+            "id": 9,
+            "weight": 64,
+            "caloriesBurnt": 198,
+            "startTime": "2024-01-09 17:34:00",
+            "endTime": "2024-01-09 17:53:00"
+        },
+        {
+            "id": 10,
+            "weight": 65,
+            "caloriesBurnt": 299,
+            "startTime": "2024-01-10 10:02:00",
+            "endTime": "2024-01-10 10:31:00"
+        }
+    ]
 }
