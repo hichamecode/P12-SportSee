@@ -1,10 +1,5 @@
-
-type UserType = {
-    id: number;
-    name: string;
-}
-
-export default class User {
+import UserType from "../types/UserType";
+ class User {
 
   private userValue: UserType;
 
@@ -20,3 +15,5 @@ export default class User {
         return this.userValue.name;
     }
 }
+
+export default User;

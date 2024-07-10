@@ -1,9 +1,9 @@
-
-
-export default class UserScore {
-    private _score: number;
+import UserScoreType from "../types/UserScoreType";
+class UserScore {
+    private _score: UserScoreType;
     
-    constructor(score: number) {
+    constructor(score: UserScoreType) {
+        
         this._score = score;
     }
 
@@ -12,3 +12,4 @@ export default class UserScore {
     }
 }
 
+export default UserScore;

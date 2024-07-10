@@ -1,18 +1,9 @@
+import UserStatsType from "../types/UserStatsType"
 
+class UserStats {
+    private _stats: UserStatsType;
 
-type StatsType = {
-    intensity: number;
-    speed: number;
-    strength: number;
-    endurance: number;
-    energy: number;
-    cardio: number;
-}
-
-export default class UserStats {
-     _stats: StatsType;
-
-    constructor(stats: StatsType) {
+    constructor(stats: UserStatsType) {
         this._stats = stats;
     }
 
@@ -20,3 +11,5 @@ export default class UserStats {
         return this._stats;
     }
 }
+
+export default UserStats;

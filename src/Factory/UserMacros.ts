@@ -1,16 +1,10 @@
+import UserMacrosType from "../types/UserMacrosType";
 
-type Macros = {
-    calories: number;
-    proteins: number;
-    carbs: number;
-    fats: number;
-}
+ class UserMacros {
 
-export default class UserMacros {
+  private _macrosValue: UserMacrosType;
 
-  private _macrosValue: Macros;
-
-    constructor(macrosValue: Macros) {
+    constructor(macrosValue: UserMacrosType) {
         this._macrosValue = macrosValue
     }
 
@@ -19,3 +13,4 @@ export default class UserMacros {
     }
 }
 
+export default UserMacros;

@@ -10,31 +10,54 @@ import fatIcon from "../assets/cheeseburger.svg";
 // import d3 library for data visualization
 // import * as d3 from "d3";
 import ApiMock from "../services/apiMock";
+import { mockUrl } from "../main";
 
-const urlMock = "../mocks/mock.json";
-
-
+import User from "../Factory/User";
+import UserType from "../Factory/User";
+import UserMacros from "../Factory/UserMacros";
+import Macros from "../Factory/UserMacros"
+import UserScore from "../Factory/UserScore";
+import UserStats from "../Factory/UserStats";
+import StatsType from "../Factory/UserStats";
 
 function Home() {
-  const [userData, setUserData] = useState(null);
+
+  const [user, setUser] = useState(null);
+  const [userMacros, setUserMacros] = useState(null);
+  const [userScore, setUserScore] = useState(null);
+  const [userStats, setUserStats] = useState(null);
+
   useEffect(() => {
     const newApiMock = new ApiMock();
 
     const getData = async () => {
-      return await newApiMock.getAll(urlMock);
+      return await newApiMock.getAll(mockUrl);
     };
+
     getData()
       .then((result) => {
-        const userData = result.data;
+        const data = result.data;
+       
 
-        setUserData(userData);
+        const id = new User(data.id)
+        const name = new User(data.name)
+        const user = new User(data.userValue as UserType);
+        const macros = new UserMacros(data.macros as Macros);
+        const score = new UserScore(data.score);
+        const stats = new UserStats(data.stats as StatsType);
+        setUser(id)
+        setUser(name);
+        setUserMacros(macros);
+        setUserScore(score);
+        setUserStats(stats);
+        
       })
       .catch((error) => {
-        console.error("erreur, impossible de récupérer les données ", error);
+        console.error("Erreur lors du chargement des données ", error);
       });
   }, []);
 
-  if (userData === null) {
+  if (!user || !userMacros || !userScore || !userStats) {
     return (
       <Layout>
         <h1>
@@ -50,7 +73,7 @@ function Home() {
     <Layout>
       <div className="main-title-container">
         <h1 className="main-title">
-          Bonjour <span>Thomas</span>
+          Bonjour <span>{user.name}</span>
         </h1>
         <p className="main-title-greetings">
           Félicitations ! Vous avez explosé vos objectifs d'hier 👏
