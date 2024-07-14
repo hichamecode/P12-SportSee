@@ -1,11 +1,11 @@
 {
     "id": 20,
-    "name": "Sébastien",
+    "name": "Sebastien",
     "macrosValue" : {
         "calories": 3000,
         "proteins": 120,
         "carbs": 150,
-        "fat": 80
+        "fats": 80
     },
     "statistics" : {
         "intensity": 2,

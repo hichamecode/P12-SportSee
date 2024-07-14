@@ -2,9 +2,9 @@ import UserScoreType from "../types/UserScoreType";
 class UserScore {
     private _score: UserScoreType;
     
-    constructor(score: UserScoreType) {
+    constructor(UserScore: UserScoreType) {
         
-        this._score = score;
+        this._score = UserScore.score;
     }
 
     get score() {

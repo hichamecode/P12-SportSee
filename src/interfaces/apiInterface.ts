@@ -1,7 +1,7 @@
 
 interface apiInterface {
 
-    get<T>(url: string, id: number | string): Promise<T>;
+    get<T>(id: number | string): Promise<T>;
     getAll<T>(url: string): Promise<T>;
 }
 

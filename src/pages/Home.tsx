@@ -2,62 +2,56 @@ import Layout from "../components/Layout";
 import Macro from "../components/Macro/Macro";
 import "./Home.scss";
 import { useEffect, useState } from "react";
+
 import caloriesIcon from "../assets/energy.svg";
 import proteinIcon from "../assets/chicken.svg";
 import carbIcon from "../assets/apple.svg";
 import fatIcon from "../assets/cheeseburger.svg";
 
-// import d3 library for data visualization
-// import * as d3 from "d3";
 import ApiMock from "../services/apiMock";
-import { mockUrl } from "../main";
+import { mockUrl } from "../main"; // retirer l'url des paramètre, et l'appeler dans le provider
+
 
 import User from "../Factory/User";
-import UserType from "../Factory/User";
 import UserMacros from "../Factory/UserMacros";
-import Macros from "../Factory/UserMacros"
 import UserScore from "../Factory/UserScore";
 import UserStats from "../Factory/UserStats";
-import StatsType from "../Factory/UserStats";
+import Session from "../Factory/Session";
 
-function Home() {
+import MyD3Component from "../components/Myd3Component";
+import apiInterface from "../interfaces/apiInterface";
 
-  const [user, setUser] = useState(null);
-  const [userMacros, setUserMacros] = useState(null);
-  const [userScore, setUserScore] = useState(null);
-  const [userStats, setUserStats] = useState(null);
+type props = {userProvider: apiInterface}
+
+function Home({userProvider}: props) { // injection de dépendances
+
+
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    const newApiMock = new ApiMock();
+    // const newApiMock = new ApiMock();
 
     const getData = async () => {
-      return await newApiMock.getAll(mockUrl);
+      return await userProvider.get(id);
     };
+
+    // ajouter l'id au localStorage (token) , ou id dans un fichier en "dur" une classe services pour aller récup l'id dans le localStorage.getItem
+    // pour accéder au dashboard l'utilisateur est déjà utiliser
+    // passer sur chartJS
 
     getData()
       .then((result) => {
         const data = result.data;
-       
+        setUserData(data)
 
-        const id = new User(data.id)
-        const name = new User(data.name)
-        const user = new User(data.userValue as UserType);
-        const macros = new UserMacros(data.macros as Macros);
-        const score = new UserScore(data.score);
-        const stats = new UserStats(data.stats as StatsType);
-        setUser(id)
-        setUser(name);
-        setUserMacros(macros);
-        setUserScore(score);
-        setUserStats(stats);
-        
       })
       .catch((error) => {
         console.error("Erreur lors du chargement des données ", error);
       });
   }, []);
 
-  if (!user || !userMacros || !userScore || !userStats) {
+
+  if (userData === null) {
     return (
       <Layout>
         <h1>
@@ -67,13 +61,31 @@ function Home() {
     );
   }
 
-  // créer une factory pour destructurer, puis instancier l'user et lui passer les attributs, une méthode par provider (depuis mock ou depuis une api)
+  type userData = {
+    id: number;
+    name: string;
+    macrosValue: {
+      calories: number;
+      proteins: number;
+      carbs: number;
+      fats: number;
+    };
+  }
+
+const newUser = new User(userData)
+const newUserMacros = new UserMacros(userData.macrosValue)
+const newUserScore = new UserScore(userData.score)
+const newUserStats = new UserStats(userData.statistics)
+const newSession = new Session(userData.sessionLength)
+
+console.log(newUserStats)
+
 
   return (
     <Layout>
       <div className="main-title-container">
         <h1 className="main-title">
-          Bonjour <span>{user.name}</span>
+          Bonjour <span>{newUser.name}</span>
         </h1>
         <p className="main-title-greetings">
           Félicitations ! Vous avez explosé vos objectifs d'hier 👏
@@ -83,16 +95,16 @@ function Home() {
         <div className="graphics-left-side">
           <div className="daily-graphics"></div>
           <div className="widgets-container">
-            <div className="widget-wrapper"></div>
-            <div className="widget-wrapper"></div>
-            <div className="widget-wrapper"></div>
+          <MyD3Component />
+            <div className="widget-wrapper radar-widget"></div>
+            <div className="widget-wrapper circle-widget"></div>
           </div>
         </div>
         <div className="graphics-right-side">
-          <Macro key="0" image={caloriesIcon} title="Calories" value="" />
-          <Macro key="1" image={proteinIcon} title="Proteines" value="" />
-          <Macro key="2" image={carbIcon} title="Glucides" value="" />
-          <Macro key="3" image={fatIcon} title="Lipides" value="" />
+          <Macro key="0" image={caloriesIcon} title="Calories" value={newUserMacros.calories} unit="kCal" />
+          <Macro key="1" image={proteinIcon} title="Proteines" value={newUserMacros.proteins} unit="g" />
+          <Macro key="2" image={carbIcon} title="Glucides" value={newUserMacros.carbs} unit="g" />
+          <Macro key="3" image={fatIcon} title="Lipides" value={newUserMacros.fats} unit="g" />
         </div>
       </div>
     </Layout>

@@ -3,11 +3,12 @@ import "./Macro.scss";
 type macroProps = {
   image:string;
   title:string;
-  value:string;
+  unit:string;
+  value:number;
 }
 
 function Macro(props: macroProps) {
-  const {image, title, value} = props
+  const {image, title, unit, value} = props
 
   return(
     <div className="macro-container">
@@ -15,7 +16,7 @@ function Macro(props: macroProps) {
         <img src={image} alt="image" className="macro-icon" />
       </div>
       <div className="macro-content">
-        <p className="macro-value">{value}</p>
+        <p className="macro-value">{value}{unit}</p>
         <p className="macro-title">{title}</p>
       </div>
     </div>

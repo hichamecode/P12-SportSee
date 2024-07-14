@@ -17,3 +17,17 @@ import UserType from "../types/UserType";
 }
 
 export default User;
+
+
+// interface UserFromApiInterface {
+//     getId(): number;
+//     getName(): string;
+//     getScore(): number;
+//     getKeyData(): {
+//         calorieCount: number;
+//         proteinCount: number;
+//         carbohydrateCount: number;
+//         lipidCount: number;
+//       };    
+// }
+
