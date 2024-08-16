@@ -1,101 +1,204 @@
 {
-    "id": 20,
-    "name": "Sebastien",
-    "macrosValue" : {
-        "calories": 3000,
-        "proteins": 120,
-        "carbs": 150,
-        "fats": 80
-    },
-    "statistics" : {
-        "intensity": 2,
-        "speed": 3,
-        "strength": 4,
-        "endurance": 3,
-        "energy": 2,
-        "cardio": 4
-    },
-    "score" : 0.15,
-    "sessionLength" : {
-        "monday": 21,
-        "tuesday": 35,
-        "wednesday": 50,
-        "thursday": 15,
-        "friday": 58,
-        "saturday": 0,
-        "sunday": 10
-    },
-
-   "activities": [
+    "users": [
         {
-            "id": 1,
-            "weight": 68,
-            "caloriesBurnt": 356,
-            "startTime": "2024-01-01 07:06:00",
-            "endTime": "2024-01-01 07:41:00"
+            "id": 20,
+            "name": "Sebastien",
+            "macrosValue": {
+                "calories": 3000,
+                "proteins": 120,
+                "carbs": 150,
+                "fats": 80
+            },
+            "statistics": {
+                "intensity": 2,
+                "speed": 3,
+                "strength": 4,
+                "endurance": 3,
+                "energy": 2,
+                "cardio": 4
+            },
+            "score": 0.15,
+            "sessionLength": [
+                { "day": "L",  "sessionLength": 21 },
+                { "day": "M", "sessionLength": 35 },
+                { "day": "M",  "sessionLength": 50 },
+                { "day": "J", "sessionLength": 15 },
+                { "day": "V", "sessionLength": 58 },
+                { "day": "S",  "sessionLength": 0 },
+                { "day": "D", "sessionLength": 10 }
+            ],
+            "activities": [
+                {
+                    "id": 1,
+                    "weight": 68,
+                    "caloriesBurnt": 356,
+                    "startTime": "2024-01-01 07:06:00",
+                    "endTime": "2024-01-01 07:41:00"
+                },
+                {
+                    "id": 2,
+                    "weight": 68,
+                    "caloriesBurnt": 425,
+                    "startTime": "2024-01-02 07:36:00",
+                    "endTime": "2024-01-02 08:18:00"
+                },
+                {
+                    "id": 3,
+                    "weight": 67,
+                    "caloriesBurnt": 300,
+                    "startTime": "2024-01-03 10:01:00",
+                    "endTime": "2024-01-03 10:31:00"
+                },
+                {
+                    "id": 4,
+                    "weight": 67,
+                    "caloriesBurnt": 150,
+                    "startTime": "2024-01-04 12:29:00",
+                    "endTime": "2024-01-04 12:44:00"
+                },
+                {
+                    "id": 5,
+                    "weight": 67,
+                    "caloriesBurnt": 478,
+                    "startTime": "2024-01-05 06:25:00",
+                    "endTime": "2024-01-05 07:12:00"
+                },
+                {
+                    "id": 6,
+                    "weight": 66,
+                    "caloriesBurnt": 678,
+                    "startTime": "2024-01-06 16:01:00",
+                    "endTime": "2024-01-06 17:08:00"
+                },
+                {
+                    "id": 7,
+                    "weight": 65,
+                    "caloriesBurnt": 259,
+                    "startTime": "2024-01-07 17:02:00",
+                    "endTime": "2024-01-07 17:27:00"
+                },
+                {
+                    "id": 8,
+                    "weight": 64,
+                    "caloriesBurnt": 350,
+                    "startTime": "2024-01-08 15:05:00",
+                    "endTime": "2024-01-08 15:40:00"
+                },
+                {
+                    "id": 9,
+                    "weight": 64,
+                    "caloriesBurnt": 198,
+                    "startTime": "2024-01-09 17:34:00",
+                    "endTime": "2024-01-09 17:53:00"
+                },
+                {
+                    "id": 10,
+                    "weight": 65,
+                    "caloriesBurnt": 299,
+                    "startTime": "2024-01-10 10:02:00",
+                    "endTime": "2024-01-10 10:31:00"
+                }
+            ]
         },
         {
-            "id": 2,
-            "weight": 68,
-            "caloriesBurnt": 425,
-            "startTime": "2024-01-02 07:36:00",
-            "endTime": "2024-01-02 08:18:00"
-        },
-        {
-            "id": 3,
-            "weight": 67,
-            "caloriesBurnt": 300,
-            "startTime": "2024-01-03 10:01:00",
-            "endTime": "2024-01-03 10:31:00"
-        },
-        {
-            "id": 4,
-            "weight": 67,
-            "caloriesBurnt": 150,
-            "startTime": "2024-01-04 12:29:00",
-            "endTime": "2024-01-04 12:44:00"
-        },
-        {
-            "id": 5,
-            "weight": 67,
-            "caloriesBurnt": 478,
-            "startTime": "2024-01-05 06:25:00",
-            "endTime": "2024-01-05 07:12:00"
-        },
-        {
-            "id": 6,
-            "weight": 66,
-            "caloriesBurnt": 678,
-            "startTime": "2024-01-06 16:01:00",
-            "endTime": "2024-01-06 17:08:00"
-        },
-        {
-            "id": 7,
-            "weight": 65,
-            "caloriesBurnt": 259,
-            "startTime": "2024-01-07 17:02:00",
-            "endTime": "2024-01-07 17:27:00"
-        },
-        {
-            "id": 8,
-            "weight": 64,
-            "caloriesBurnt": 350,
-            "startTime": "2024-01-08 15:05:00",
-            "endTime": "2024-01-08 15:40:00"
-        },
-        {
-            "id": 9,
-            "weight": 64,
-            "caloriesBurnt": 198,
-            "startTime": "2024-01-09 17:34:00",
-            "endTime": "2024-01-09 17:53:00"
-        },
-        {
-            "id": 10,
-            "weight": 65,
-            "caloriesBurnt": 299,
-            "startTime": "2024-01-10 10:02:00",
-            "endTime": "2024-01-10 10:31:00"
+            "id": 21,
+            "name": "Julien",
+            "macrosValue": {
+                "calories": 2500,
+                "proteins": 100,
+                "carbs": 200,
+                "fats": 70
+            },
+            "statistics": {
+                "intensity": 3,
+                "speed": 4,
+                "force": 5,
+                "endurance": 4,
+                "energy": 3,
+                "cardio": 5
+            },
+            "score": 0.20,
+            "sessionLength": [
+                { "day": "L", "sessionLength": 30 },
+                { "day": "M", "sessionLength": 40 },
+                { "day": "M", "sessionLength": 45 },
+                { "day": "J",  "sessionLength": 20 },
+                { "day": "V",  "sessionLength": 60 },
+                { "day": "S", "sessionLength": 5 },
+                { "day": "D", "sessionLength": 15 }
+            ],
+            "activities": [
+                {
+                    "id": 1,
+                    "weight": 70,
+                    "caloriesBurnt": 400,
+                    "startTime": "2024-01-01 08:00:00",
+                    "endTime": "2024-01-01 08:35:00"
+                },
+                {
+                    "id": 2,
+                    "weight": 70,
+                    "caloriesBurnt": 450,
+                    "startTime": "2024-01-02 07:00:00",
+                    "endTime": "2024-01-02 07:45:00"
+                },
+                {
+                    "id": 3,
+                    "weight": 69,
+                    "caloriesBurnt": 350,
+                    "startTime": "2024-01-03 11:00:00",
+                    "endTime": "2024-01-03 11:30:00"
+                },
+                {
+                    "id": 4,
+                    "weight": 69,
+                    "caloriesBurnt": 200,
+                    "startTime": "2024-01-04 13:00:00",
+                    "endTime": "2024-01-04 13:20:00"
+                },
+                {
+                    "id": 5,
+                    "weight": 68,
+                    "caloriesBurnt": 500,
+                    "startTime": "2024-01-05 06:00:00",
+                    "endTime": "2024-01-05 07:00:00"
+                },
+                {
+                    "id": 6,
+                    "weight": 67,
+                    "caloriesBurnt": 700,
+                    "startTime": "2024-01-06 17:00:00",
+                    "endTime": "2024-01-06 18:10:00"
+                },
+                {
+                    "id": 7,
+                    "weight": 66,
+                    "caloriesBurnt": 300,
+                    "startTime": "2024-01-07 18:00:00",
+                    "endTime": "2024-01-07 18:30:00"
+                },
+                {
+                    "id": 8,
+                    "weight": 65,
+                    "caloriesBurnt": 370,
+                    "startTime": "2024-01-08 14:00:00",
+                    "endTime": "2024-01-08 14:35:00"
+                },
+                {
+                    "id": 9,
+                    "weight": 65,
+                    "caloriesBurnt": 220,
+                    "startTime": "2024-01-09 18:00:00",
+                    "endTime": "2024-01-09 18:25:00"
+                },
+                {
+                    "id": 10,
+                    "weight": 66,
+                    "caloriesBurnt": 320,
+                    "startTime": "2024-01-10 10:30:00",
+                    "endTime": "2024-01-10 11:00:00"
+                }
+            ]
         }
     ]
 }

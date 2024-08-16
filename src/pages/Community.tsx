@@ -4,7 +4,7 @@ function Community () {
 
     return (
         <Layout>
-        <h1>ceci est la page community</h1>
+        <h1>Ceci est la page Community</h1>
 
         </Layout>
     )

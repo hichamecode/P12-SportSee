@@ -6,7 +6,7 @@ function Settings () {
     return (
 
           <Layout>
-              <h1>ceci est la page Settings</h1>
+              <h1>Ceci est la page Settings</h1>
           </Layout>
 
       )

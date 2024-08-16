@@ -24,15 +24,14 @@
 }
 
 .graphics-container {
-    margin-top: 77px;
-    width: 1124px;
-    height: 613px;
+    padding-top: 77px;
+    width: 100%;
     display: flex;
     gap: 31px;
 
+
     .graphics-left-side {
         width: 74%;
-        height: 100%;
         display: flex;
         flex-direction: column;
         gap: 30px;
@@ -40,22 +39,13 @@
         .daily-graphics {
             width: 100%;
             height: 320px;
-            background-color: rgb(164, 177, 177);
             border-radius: 5px;
         }
 
         .widgets-container {
             width: 100%;
-            height: 263px;
             display: flex;
             gap: 30px;
-
-            .widget-wrapper {
-                width: 31%;
-                height: 263px;
-                background-color: #9f9b9b;
-                border-radius: 5px;
-            }
         }
     }
 

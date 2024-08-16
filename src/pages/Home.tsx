@@ -1,57 +1,115 @@
+
+
 import Layout from "../components/Layout";
 import Macro from "../components/Macro/Macro";
 import "./Home.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 
+// import icons for Macro Components
 import caloriesIcon from "../assets/energy.svg";
 import proteinIcon from "../assets/chicken.svg";
 import carbIcon from "../assets/apple.svg";
 import fatIcon from "../assets/cheeseburger.svg";
 
-import ApiMock from "../services/apiMock";
-import { mockUrl } from "../main"; // retirer l'url des paramètre, et l'appeler dans le provider
+// import Charts
+import StatsChart from "../components/Charts/StatsChart";
+import ScoreChart from "../components/Charts/ScoreChart";
+import SessionsChart from "../components/Charts/SessionsChart";
+import ActivityChart from "../components/Charts/ActivityChart";
 
+import UserProviderInterface from "../interfaces/UserProviderInterface";
+import Auth from "../services/Auth";
 
-import User from "../Factory/User";
-import UserMacros from "../Factory/UserMacros";
-import UserScore from "../Factory/UserScore";
-import UserStats from "../Factory/UserStats";
-import Session from "../Factory/Session";
+// reducer > sortir le reducer et l'importer depuis un fichier séparé
 
-import MyD3Component from "../components/Myd3Component";
-import apiInterface from "../interfaces/apiInterface";
+function reducer(state, action) {
 
-type props = {userProvider: apiInterface}
+  switch (action.type) {
+    case 'SET_USER_DATA':
+      return { ...state, userData: action.payload };
+    case 'SET_USER_MACROS':
+      return { ...state, userMacros: action.payload };
+    case 'SET_USER_STATS':
+      return { ...state, userStats: action.payload };
+    case 'SET_USER_SCORE':
+      return { ...state, userScore: action.payload };
+    case 'SET_USER_SESSION':
+      return { ...state, userSession: action.payload };
+    case 'SET_USER_ACTIVITIES':
+      return { ...state, userActivities: action.payload };
+    case 'LOADING':
+      return { ...state, loading: action.payload };
+    default:
+      return state;
+  }
+}
 
-function Home({userProvider}: props) { // injection de dépendances
+const initialState = {
+  userData: null,
+  userMacros: null,
+  userStats: null,
+  userScore: null,
+  userSession: null,
+  userActivities: null,
+  loading: true,
+};
 
+type props = { userProvider: UserProviderInterface };
 
-  const [userData, setUserData] = useState(null);
+function Home({ userProvider }: props) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const userId = Auth.getUserId();
+
+  if (userId === null) {
+    throw 'user not found from localStorage';
+  }
 
   useEffect(() => {
-    // const newApiMock = new ApiMock();
+    // raccourir le code pour avoir un seul dispatch
+    dispatch({ type: 'LOADING', payload: true });
 
-    const getData = async () => {
-      return await userProvider.get(id);
-    };
+    userProvider.getUser(userId).then((user) =>
+      dispatch({ type: 'SET_USER_DATA', payload: user })
+    );
+    userProvider.getUserMacros(userId).then((macros) =>
+      dispatch({ type: 'SET_USER_MACROS', payload: macros })
+    );
+    userProvider.getUserStats(userId).then((stats) =>
+      dispatch({ type: 'SET_USER_STATS', payload: stats })
+    );
+    userProvider.getUserScore(userId).then((score) =>
+      dispatch({ type: 'SET_USER_SCORE', payload: score })
+    );
+    userProvider.getSession(userId).then((session) =>
+      dispatch({ type: 'SET_USER_SESSION', payload: session })
+    );
+    userProvider.getActivities(userId).then((activities) =>
+      dispatch({ type: 'SET_USER_ACTIVITIES', payload: activities })
+    );
 
-    // ajouter l'id au localStorage (token) , ou id dans un fichier en "dur" une classe services pour aller récup l'id dans le localStorage.getItem
-    // pour accéder au dashboard l'utilisateur est déjà utiliser
-    // passer sur chartJS
+    dispatch({ type: 'LOADING', payload: false });
+  }, [userProvider, userId]);
 
-    getData()
-      .then((result) => {
-        const data = result.data;
-        setUserData(data)
+  const {
+    userData,
+    userMacros,
+    userStats,
+    userScore,
+    userSession,
+    userActivities,
+    loading,
+  } = state;
 
-      })
-      .catch((error) => {
-        console.error("Erreur lors du chargement des données ", error);
-      });
-  }, []);
-
-
-  if (userData === null) {
+  if (
+    loading ||
+    !userData ||
+    !userScore ||
+    !userMacros ||
+    !userStats ||
+    !userSession ||
+    !userActivities
+  ) {
     return (
       <Layout>
         <h1>
@@ -61,31 +119,15 @@ function Home({userProvider}: props) { // injection de dépendances
     );
   }
 
-  type userData = {
-    id: number;
-    name: string;
-    macrosValue: {
-      calories: number;
-      proteins: number;
-      carbs: number;
-      fats: number;
-    };
-  }
+const { name } = userData;
 
-const newUser = new User(userData)
-const newUserMacros = new UserMacros(userData.macrosValue)
-const newUserScore = new UserScore(userData.score)
-const newUserStats = new UserStats(userData.statistics)
-const newSession = new Session(userData.sessionLength)
-
-console.log(newUserStats)
-
+  const { calories, proteins, carbs, fats } = userMacros;
 
   return (
     <Layout>
       <div className="main-title-container">
         <h1 className="main-title">
-          Bonjour <span>{newUser.name}</span>
+          Bonjour <span>{name}</span>
         </h1>
         <p className="main-title-greetings">
           Félicitations ! Vous avez explosé vos objectifs d'hier 👏
@@ -93,18 +135,38 @@ console.log(newUserStats)
       </div>
       <div className="graphics-container">
         <div className="graphics-left-side">
-          <div className="daily-graphics"></div>
+          <div className="daily-graphics">
+            <ActivityChart data={userActivities}/>
+          </div>
           <div className="widgets-container">
-          <MyD3Component />
-            <div className="widget-wrapper radar-widget"></div>
-            <div className="widget-wrapper circle-widget"></div>
+            <SessionsChart data={userSession} />
+            <StatsChart statistics={userStats} />
+            <ScoreChart userScore={userScore} />
           </div>
         </div>
         <div className="graphics-right-side">
-          <Macro key="0" image={caloriesIcon} title="Calories" value={newUserMacros.calories} unit="kCal" />
-          <Macro key="1" image={proteinIcon} title="Proteines" value={newUserMacros.proteins} unit="g" />
-          <Macro key="2" image={carbIcon} title="Glucides" value={newUserMacros.carbs} unit="g" />
-          <Macro key="3" image={fatIcon} title="Lipides" value={newUserMacros.fats} unit="g" />
+          <Macro
+            key="0"
+            image={caloriesIcon}
+            title="Calories"
+            value={calories}
+            unit="kCal"
+          />
+          <Macro
+            key="1"
+            image={proteinIcon}
+            title="Proteines"
+            value={proteins}
+            unit="g"
+          />
+          <Macro
+            key="2"
+            image={carbIcon}
+            title="Glucides"
+            value={carbs}
+            unit="g"
+          />
+          <Macro key="3" image={fatIcon} title="Lipides" value={fats} unit="g" />
         </div>
       </div>
     </Layout>

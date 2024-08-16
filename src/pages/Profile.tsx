@@ -6,7 +6,7 @@ function Profile () {
     return (
 
           <Layout>
-              <h1>ceci est la page Profile</h1>
+              <h1>Ceci est la page Profile</h1>
           </Layout>
 
       )
