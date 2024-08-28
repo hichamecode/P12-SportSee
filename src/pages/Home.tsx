@@ -1,5 +1,3 @@
-
-
 import Layout from "../components/Layout";
 import Macro from "../components/Macro/Macro";
 import "./Home.scss";
@@ -20,25 +18,24 @@ import ActivityChart from "../components/Charts/ActivityChart";
 import UserProviderInterface from "../interfaces/UserProviderInterface";
 import Auth from "../services/Auth";
 
-// reducer > sortir le reducer et l'importer depuis un fichier séparé
-
 function reducer(state, action) {
-
   switch (action.type) {
-    case 'SET_USER_DATA':
+    case "SET_USER_DATA":
       return { ...state, userData: action.payload };
-    case 'SET_USER_MACROS':
+    case "SET_USER_MACROS":
       return { ...state, userMacros: action.payload };
-    case 'SET_USER_STATS':
+    case "SET_USER_STATS":
       return { ...state, userStats: action.payload };
-    case 'SET_USER_SCORE':
+    case "SET_USER_SCORE":
       return { ...state, userScore: action.payload };
-    case 'SET_USER_SESSION':
+    case "SET_USER_SESSION":
       return { ...state, userSession: action.payload };
-    case 'SET_USER_ACTIVITIES':
+    case "SET_USER_ACTIVITIES":
       return { ...state, userActivities: action.payload };
-    case 'LOADING':
+    case "LOADING":
       return { ...state, loading: action.payload };
+    case "SET_ERROR":
+      return {...state, error: action.payload, loading: false}
     default:
       return state;
   }
@@ -52,6 +49,7 @@ const initialState = {
   userSession: null,
   userActivities: null,
   loading: true,
+  error: null,
 };
 
 type props = { userProvider: UserProviderInterface };
@@ -62,64 +60,58 @@ function Home({ userProvider }: props) {
   const userId = Auth.getUserId();
 
   if (userId === null) {
-    throw 'user not found from localStorage';
+    throw "user not found from localStorage";
   }
 
   useEffect(() => {
-    // raccourir le code pour avoir un seul dispatch
-    dispatch({ type: 'LOADING', payload: true });
-
-    userProvider.getUser(userId).then((user) =>
-      dispatch({ type: 'SET_USER_DATA', payload: user })
-    );
-    userProvider.getUserMacros(userId).then((macros) =>
-      dispatch({ type: 'SET_USER_MACROS', payload: macros })
-    );
-    userProvider.getUserStats(userId).then((stats) =>
-      dispatch({ type: 'SET_USER_STATS', payload: stats })
-    );
-    userProvider.getUserScore(userId).then((score) =>
-      dispatch({ type: 'SET_USER_SCORE', payload: score })
-    );
-    userProvider.getSession(userId).then((session) =>
-      dispatch({ type: 'SET_USER_SESSION', payload: session })
-    );
-    userProvider.getActivities(userId).then((activities) =>
-      dispatch({ type: 'SET_USER_ACTIVITIES', payload: activities })
-    );
-
-    dispatch({ type: 'LOADING', payload: false });
+    const fetchData = async () => {
+      try {
+        dispatch({ type: "LOADING", payload: true });
+  
+        const [user, macros, stats, score, session, activities] = await Promise.all([
+          userProvider.getUser(userId),
+          userProvider.getUserMacros(userId),
+          userProvider.getUserStats(userId),
+          userProvider.getUserScore(userId),
+          userProvider.getSession(userId),
+          userProvider.getActivities(userId),
+        ]);
+  
+        dispatch({ type: "SET_USER_DATA", payload: user });
+        dispatch({ type: "SET_USER_MACROS", payload: macros });
+        dispatch({ type: "SET_USER_STATS", payload: stats });
+        dispatch({ type: "SET_USER_SCORE", payload: score });
+        dispatch({ type: "SET_USER_SESSION", payload: session });
+        dispatch({ type: "SET_USER_ACTIVITIES", payload: activities });
+        dispatch({ type: "LOADING", payload: false });
+      } catch (error) {
+        dispatch({ type: "SET_ERROR", payload: "Erreur lors du chargement des données. Veuillez réessayer plus tard" });
+      }
+    };
+  
+    fetchData();
   }, [userProvider, userId]);
+  
 
-  const {
-    userData,
-    userMacros,
-    userStats,
-    userScore,
-    userSession,
-    userActivities,
-    loading,
-  } = state;
+  const { userData, userMacros, userStats, userScore, userSession, userActivities, loading, error } = state;
 
-  if (
-    loading ||
-    !userData ||
-    !userScore ||
-    !userMacros ||
-    !userStats ||
-    !userSession ||
-    !userActivities
-  ) {
+  if (loading) {
     return (
       <Layout>
-        <h1>
-          Vos données sont en cours de chargement <br /> Merci de patienter{" "}
-        </h1>
+        <h1>Vos données sont en cours de chargement<br />Merci de patienter</h1>
+      </Layout>
+    );
+  }
+  
+  if (error) {
+    return (
+      <Layout>
+        <h1>{error}</h1>
       </Layout>
     );
   }
 
-const { name } = userData;
+  const { name } = userData;
 
   const { calories, proteins, carbs, fats } = userMacros;
 
@@ -136,7 +128,7 @@ const { name } = userData;
       <div className="graphics-container">
         <div className="graphics-left-side">
           <div className="daily-graphics">
-            <ActivityChart data={userActivities}/>
+            <ActivityChart data={userActivities} />
           </div>
           <div className="widgets-container">
             <SessionsChart data={userSession} />
@@ -166,7 +158,13 @@ const { name } = userData;
             value={carbs}
             unit="g"
           />
-          <Macro key="3" image={fatIcon} title="Lipides" value={fats} unit="g" />
+          <Macro
+            key="3"
+            image={fatIcon}
+            title="Lipides"
+            value={fats}
+            unit="g"
+          />
         </div>
       </div>
     </Layout>

@@ -75,6 +75,12 @@ class UserProviderFromApi implements UserProviderInterface {
 
     async getUserScore(userId: string): Promise<UserScoreType> {
         const userData = await this.fetchUserData(userId);
+
+        if (!userData.score) {
+
+            return userData.todayScore
+        }
+
         return userData.score;
     }
 
